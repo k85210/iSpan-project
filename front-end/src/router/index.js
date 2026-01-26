@@ -3,14 +3,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 // 定義router
 const routes = [
   {
-    
+    path: '/login',
+    component: () => import('@/views/LoginView.vue'),
+    name: 'Login'
   }
 ];
 
 // 建立router
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: []
+  history: createWebHistory(),
+  routes: routes
 });
 
 export default router;
