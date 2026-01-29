@@ -3,31 +3,53 @@
 
 
 
+
 </script>
+
 
     <template >
 
-        <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">商品名稱</h5>
-            <p class="card-text">我是商品描述描述描述描述123456789</p>
-            <p class="card-text">價格: </p>
-            <p class="card-text">數量: </p>
 
-            <!-- <a href="#" class="btn btn-primary">加入購物車</a> -->
-            
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            加入購物車
-            </button>
+        <div class="header-cart">
+            <h1>購物車</h1>
+            <p>With this shop hompeage template</p>
         </div>
+
+
+        <div class="shop-container">
+        <div class="shop-grid">
+
+
+    <!-- 卡片 1 -->
+    <div class="card-cart">
+        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" />
+        <div class="card-body">
+            <h5>Fancy Product</h5>
+            <div class="price">$40.00 - $80.00</div>
         </div>
+        <div class="card-footer">
+            <a class="btn " href="#" @click="addToCart">加入購物車</a>
+        </div>
+    </div>
+
+
+    <hr/>
+    <hr/>
+
+
+        
+        </div>
+    </div>
+        
 
 
     
 
+
     </template>
 
+
 <style scoped>
+
 
 </style>

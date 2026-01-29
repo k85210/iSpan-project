@@ -5,6 +5,7 @@ Global
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -12,15 +13,25 @@ body {
     color: #212529;
 }
 
+
 /* -----------------------------
 Header（那塊深色大標題）
 ------------------------------ */
 .header {
     background: #1f2428;
-    padding: 60px 0;
+    padding: 30px 0;
     text-align: center;
     color: #fff;
 }
+
+
+.header-cart {
+    background: #1f2428;
+    padding: 15px 0;
+    text-align: center;
+    color: #fff;
+}
+
 
 .header h1 {
     font-size: 64px;
@@ -28,11 +39,13 @@ Header（那塊深色大標題）
     margin: 0;
 }
 
+
 .header p {
     margin: 12px 0 0;
     font-size: 20px;
     color: rgba(255, 255, 255, 0.6);
 }
+
 
 /* -----------------------------
 商品區塊 Container
@@ -41,12 +54,14 @@ Header（那塊深色大標題）
     padding: 80px 40px;
 }
 
+
 .shop-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     justify-items: center;
 }
+
 
 /* -----------------------------
 卡片 Card
@@ -58,17 +73,33 @@ Header（那塊深色大標題）
     overflow: hidden;
     background: #fff;
     position: relative;
+    justify-items: center;
+
+
 }
+
+
+.card-cart {
+    width: 1000px;
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+}
+
 
 .card img {
     width: 100%;
     display: block;
 }
 
+
 .card-body {
     padding: 20px;
     text-align: center;
 }
+
 
 .card-body h5 {
     margin: 0 0 12px;
@@ -76,10 +107,12 @@ Header（那塊深色大標題）
     font-weight: 700;
 }
 
+
 .card-body .price {
     font-size: 18px;
     color: #333;
 }
+
 
 /* 促銷價、刪除線 */
 .card-body .price .old {
@@ -87,6 +120,7 @@ Header（那塊深色大標題）
     color: #999;
     margin-right: 8px;
 }
+
 
 /* -----------------------------
 星星評價
@@ -138,4 +172,8 @@ Sale 標籤
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 14px;
+}
+
+.img-cover {
+    object-fit: cover;
 }
