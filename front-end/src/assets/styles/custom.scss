@@ -1,0 +1,58 @@
+// GDG Theme Colors
+$gdg-gold: #9f9572;
+$gdg-gold-dark: #776f54;
+$gdg-gold-hover: #605a44;
+$gdg-bg-light: rgba(160, 150, 115, 0.05);
+
+// Custom Button Styles
+.btn-gdg {
+    background-color: $gdg-gold;
+    color: #fff;
+    border: 1px solid $gdg-gold;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+        background-color: $gdg-gold-dark;
+        border-color: $gdg-gold-dark;
+        color: #fff;
+    }
+}
+
+.btn-outline-gdg {
+    background-color: transparent;
+    color: $gdg-gold;
+    border: 1px solid $gdg-gold;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+        background-color: $gdg-gold;
+        color: #fff;
+    }
+}
+
+// Custom Card Styles
+.card-gdg {
+    border: 1px solid $gdg-gold;
+    border-radius: 0; // Reference uses sharp borders
+    background-color: #fff;
+    transition: all 0.3s ease-out;
+
+    &.card-hover:hover {
+        box-shadow: 12px 12px 0px rgba(160, 150, 115, 0.2);
+        transform: translate(-3px, -3px);
+    }
+}
+
+// Utilities
+.bg-gdg-light {
+    background-color: $gdg-bg-light !important;
+}
+
+.text-gdg {
+    color: $gdg-gold !important;
+}
+
+// Global reset/font
+body {
+    background-color: #fff;
+}
