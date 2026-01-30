@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import SeatManager from '@/components/EditSeat.vue';
 import TimeSlotManager from '@/components/EditTime.vue';
+import BaseButton from '@/components/common/BaseButton.vue';
 
 // 假資料初始狀態
 const seatData = ref([
@@ -26,26 +27,30 @@ const saveSettings = () => {
 </script>
 
 <template>
-  <div>
-    <h1>商家編輯畫面</h1>
-    
-    <section>
+  <div class="container py-4">
+    <h1 class="text-gdg mb-4">商家編輯畫面</h1>
+
+    <section class="mb-5 p-4 border bg-white">
+      <h2 class="h5 text-gdg mb-3">座位管理</h2>
       <SeatManager v-model="seatData" />
     </section>
 
-    <hr />
+    <hr class="my-5" />
 
-    <section>
-      <TimeSlotManager 
-        v-model:interval="bookingConfig.interval"
-        v-model:duration="bookingConfig.duration"
-      />
+    <section class="mb-5 p-4 border bg-white">
+      <h2 class="h5 text-gdg mb-3">時段配置</h2>
+      <TimeSlotManager v-model:interval="bookingConfig.interval" v-model:duration="bookingConfig.duration" />
     </section>
 
-    <div>
-      <button @click="saveSettings">儲存所有設定</button>
+    <div class="text-end">
+      <BaseButton color="gdg" size="lg" @click="saveSettings">儲存所有設定</BaseButton>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* 保持乾淨 */
+section {
+  transition: all 0.3s ease;
+}
+</style>

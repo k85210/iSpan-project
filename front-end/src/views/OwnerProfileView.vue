@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import SelectLabel from '@/components/SelectLabel.vue';
+import BaseButton from '@/components/common/BaseButton.vue';
 
 const isEditing = ref(false);
 
-const storeDescription = ref('店家簡介，好多的字...');
-const myLabels = ref(['寵物友善']);
+const storeDescription = ref('請輸入店家資訊與簡介...');
+const myLabels = ref([]);
 
 const addLabel = (newLabel) => {
   if (!myLabels.value.includes(newLabel)) {
@@ -24,48 +25,54 @@ const handleSave = () => {
 </script>
 
 <template>
-  <h1>店家資訊編輯頁面</h1>
+  <div class="container py-4">
+    <h1 class="text-gdg mb-4">店家資訊編輯頁面</h1>
 
-  <div class="info-section">
-    <div v-if="!isEditing">
-      <p>{{ storeDescription }}</p>
-    </div>
-    <div v-else>
-      <label>編輯簡介：</label>
-      <input type="text" v-model="storeDescription" class="edit-input" placeholder="請輸入店家簡介" />
-    </div>
-  </div>
-
-  <br>
-
-  <div class="label-section">
-    <h3>店舖標籤：</h3>
-    <div class="tag-list">
-      <span v-for="(tag, index) in myLabels" :key="tag" class="tag-item">
-        {{ tag }}
-        <button v-if="isEditing" @click="removeLabel(index)" class="del-btn">x</button>
-      </span>
+    <div class="info-section mb-4">
+      <div v-if="!isEditing">
+        <p class="p-3 border bg-light">{{ storeDescription }}</p>
+      </div>
+      <div v-else>
+        <label class="form-label text-gdg fw-bold">編輯簡介：</label>
+        <input type="text" v-model="storeDescription" class="form-control border-gdg" placeholder="請輸入店家簡介" />
+      </div>
     </div>
 
-    <br>
-    <div v-if="isEditing" class="edit-box">
-      <SelectLabel @add="addLabel" />
+    <div class="label-section mb-4">
+      <h3 class="text-gdg h5 mb-3">店舖標籤：</h3>
+      <div class="tag-list d-flex flex-wrap gap-2">
+        <span v-for="(tag, index) in myLabels" :key="tag"
+          class="badge rounded-0 border border-gdg text-gdg p-2 d-flex align-items-center">
+          {{ tag }}
+          <button v-if="isEditing" @click="removeLabel(index)" class="btn-close ms-2"
+            style="font-size: 0.5rem;"></button>
+        </span>
+      </div>
+
+      <div v-if="isEditing" class="edit-box mt-3 p-3 border bg-gdg-light">
+        <SelectLabel @add="addLabel" />
+      </div>
     </div>
-  </div>
 
-  <br>
+    <div class="mb-5">
+      <BaseButton v-if="!isEditing" color="gdg" @click="isEditing = true">編輯資訊</BaseButton>
+      <BaseButton v-else color="gdg" @click="handleSave">儲存編輯</BaseButton>
+    </div>
 
-  <button v-if="!isEditing" @click="isEditing = true">編輯資訊</button>
-  <button v-else @click="handleSave">儲存編輯</button>
+    <hr class="my-5">
 
-  <hr>
-
-  <div>
-    <h2>訂位編輯系統</h2>
-    <RouterLink :to="{ name: 'Seats' }" v-slot="{ navigate }">
-      <button @click="navigate">點擊進入系統</button>
-    </RouterLink>
+    <div class="mt-4">
+      <h2 class="text-gdg h4 mb-3">訂位編輯系統</h2>
+      <RouterLink :to="{ name: 'Seats' }" v-slot="{ navigate }">
+        <BaseButton color="outline-gdg" @click="navigate">點擊進入系統</BaseButton>
+      </RouterLink>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* 保持乾淨 */
+.border-gdg {
+  border-color: #9f9572 !important;
+}
+</style>
