@@ -4,7 +4,7 @@ import BaseButton from '@/components/common/BaseButton.vue';
 
 <template>
   <div class="container py-4">
-    <h1 class="text-gdg mb-4">這是首頁</h1>
+    <h1 class="text-gdg mb-4">跳轉測試用頁面</h1>
 
     <div class="bg-gdg-light p-5 text-center mb-4 border">
       <p class="text-muted">假裝有地圖...</p>

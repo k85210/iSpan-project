@@ -4,8 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('@/views/HomeView.vue'),
+    name: 'StoreHome',
+    component: () => import('@/views/StoreHomeView.vue'),
   },
   {
     path: '/login',
@@ -42,11 +42,11 @@ const routes = [
     name: 'Data',
     component: () => import('@/views/BookingDataView.vue')
   },
-  {
-    path: '/home',
-    component: () => import('@/views/HomeView.vue'),
-    name: 'Home'
-  },
+  // {
+  //   path: '/home',
+  //   component: () => import('@/views/HomeView.vue'),
+  //   name: 'Home'
+  // },
   {
     path: '/about',
     component: () => import('@/views/AboutView.vue'),
