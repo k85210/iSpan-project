@@ -1,88 +1,109 @@
-// GDG Theme Colors
-$gdg-gold: #9f9572;
-$gdg-gold-dark: #776f54;
-$gdg-gold-hover: #605a44;
-$gdg-bg-light: rgba(160, 150, 115, 0.05);
+// Theme Colors - Modern Dark Blue & Gold
+$navy-dark: #0f172a;       // Deep navy/slate dark
+$navy-subtle: #1e293b;     // Slightly lighter navy for cards/dropdowns
+$gold-primary: #d4af37;    // Classic rich gold
+$gold-light: #f1e4b8;      // Light gold for subtle accents
+$gold-hover: #b8860b;      // Dark goldenrod for hover states
+$text-gold: #fcf4d9;       // Very light gold for text on dark background
+
+// Global Layout Settings
+body {
+    background-color: $navy-dark;
+    color: $text-gold;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
 
 // Custom Button Styles
 .btn-gdg {
-    background-color: $gdg-gold;
-    color: #fff;
-    border: 1px solid $gdg-gold;
-    transition: all 0.3s ease-out;
+    background-color: $gold-primary;
+    color: $navy-dark;
+    border: 1px solid $gold-primary;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
-        background-color: $gdg-gold-dark;
-        border-color: $gdg-gold-dark;
+        background-color: $gold-hover;
+        border-color: $gold-hover;
         color: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
     }
 }
 
 .btn-outline-gdg {
     background-color: transparent;
-    color: $gdg-gold;
-    border: 1px solid $gdg-gold;
-    transition: all 0.3s ease-out;
+    color: $gold-primary;
+    border: 1px solid $gold-primary;
+    transition: all 0.3s ease;
 
     &:hover {
-        background-color: $gdg-gold;
-        color: #fff;
+        background-color: $gold-primary;
+        color: $navy-dark;
     }
 }
 
-// Custom Card Styles
+// Custom Card Styles (Modern Glassmorphism)
 .card-gdg {
-    border: 1px solid $gdg-gold;
-    border-radius: 0; // Reference uses sharp borders
-    background-color: #fff;
-    transition: all 0.3s ease-out;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    background-color: $navy-subtle;
+    color: $text-gold;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
 
     &.card-hover:hover {
-        box-shadow: 12px 12px 0px rgba(160, 150, 115, 0.2);
-        transform: translate(-3px, -3px);
+        border-color: $gold-primary;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        transform: translateY(-4px);
     }
 }
 
 // Utilities
 .bg-gdg-light {
-    background-color: $gdg-bg-light !important;
+    background-color: rgba(212, 175, 55, 0.1) !important;
 }
 
 .bg-gdg {
-    background-color: $gdg-gold !important;
+    background-color: $gold-primary !important;
+    color: $navy-dark !important;
 }
 
 .text-gdg {
-    color: $gdg-gold !important;
+    color: $gold-primary !important;
 }
 
 // Navbar Styles
 .navbar-gdg {
-    border-bottom: 3px solid $gdg-gold;
-    padding: 0.5rem 1.5rem;
-    background-color: #fff !important;
+    border-bottom: 2px solid $gold-primary;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(15, 23, 42, 0.9) !important; // Sticky transparent navy
+    backdrop-filter: blur(12px);
 
     .nav-link {
-        color: rgba(0, 0, 0, 0.7);
+        color: $text-gold;
         font-weight: 500;
         padding: 0.75rem 1rem;
         transition: all 0.3s ease;
+        opacity: 0.8;
 
         &:hover {
-            color: $gdg-gold;
+            opacity: 1;
+            color: $gold-primary;
         }
     }
 
     // Distinct Home Item
     .nav-item-home {
         .nav-link {
-            background-color: $gdg-gold;
-            color: #fff !important;
+            background-color: $gold-primary;
+            color: $navy-dark !important;
             padding: 0.75rem 1.5rem;
             margin-right: 1rem;
+            border-radius: 4px;
 
             &:hover {
-                background-color: $gdg-gold-dark;
+                background-color: $gold-hover;
+                color: #fff !important;
             }
         }
     }
@@ -94,13 +115,18 @@ $gdg-bg-light: rgba(160, 150, 115, 0.05);
     }
 
     .dropdown-menu {
-        border: 1px solid $gdg-gold;
-        border-radius: 0;
-        box-shadow: 6px 6px 0px rgba(160, 150, 115, 0.1);
+        background-color: $navy-subtle;
+        border: 1px solid $gold-primary;
+        border-radius: 4px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 
-        .dropdown-item:hover {
-            background-color: $gdg-bg-light;
-            color: $gdg-gold;
+        .dropdown-item {
+            color: $text-gold;
+            
+            &:hover {
+                background-color: rgba(212, 175, 55, 0.1);
+                color: $gold-primary;
+            }
         }
     }
 
@@ -113,13 +139,8 @@ $gdg-bg-light: rgba(160, 150, 115, 0.05);
 
             &:hover {
                 opacity: 1;
-                color: $gdg-gold;
+                color: $gold-primary;
             }
         }
     }
-}
-
-// Global reset/font
-body {
-    background-color: #fff;
 }
