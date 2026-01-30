@@ -11,7 +11,7 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/LoginView.vue'),
-
+    meta: { layout: 'blank' }
   },
   {
     path: '/storeInfo',
@@ -42,6 +42,14 @@ const routes = [
     path: '/owner/bookings/data',
     name: 'Data',
     component: () => import('@/views/BookingDataView.vue')
+
+
+  },
+  {
+    path: '/register',
+    component: () => import('@/views/RegisterView.vue'),
+    name: 'Register',
+    meta: { layout: 'blank' }
   }
 ];
 
