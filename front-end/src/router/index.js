@@ -11,7 +11,6 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/LoginView.vue'),
-
   },
   {
     path: '/storeInfo',
@@ -42,6 +41,33 @@ const routes = [
     path: '/owner/bookings/data',
     name: 'Data',
     component: () => import('@/views/BookingDataView.vue')
+  },
+  {
+    path: '/home',
+    component: () => import('@/views/HomeView.vue'),
+    name: 'Home'
+  }, {
+    path: '/about',
+    component: () => import('@/views/AboutView.vue'),
+    name: 'About'
+  }, {
+    path: '/mapSearch',
+    component: () => import('@/views/MapSearchView.vue'),
+    name: 'MapSearch'
+  }, {
+    path: '/feedback',
+    component: () => import('@/views/FeedbackView.vue'),
+    name: 'Feedback'
+  }, {
+    path: '/feedbackAP',
+    component: () => import('@/views/FeedbackAPView.vue'),
+    name: 'FeedbackAP'
+  },
+  {
+    path: '/register',
+    component: () => import('@/views/RegisterView.vue'),
+    name: 'Register',
+    meta: { layout: 'blank' }
   }
 ];
 
