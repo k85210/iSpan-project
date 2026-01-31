@@ -6,8 +6,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('@/views/HomeView.vue'),
+    name: 'StoreHome',
+    component: () => import('@/views/StoreHomeView.vue'),
   },
   {
     path: '/login',
@@ -59,20 +59,23 @@ const routes = [
   //   path: '/home',
   //   component: () => import('@/views/HomeView.vue'),
   //   name: 'Home'
-  // }, 
+  // },
   {
     path: '/about',
     component: () => import('@/views/AboutView.vue'),
     name: 'About'
-  }, {
+  },
+  {
     path: '/mapSearch',
     component: () => import('@/views/MapSearchView.vue'),
     name: 'MapSearch'
-  }, {
+  },
+  {
     path: '/feedback',
     component: () => import('@/views/FeedbackView.vue'),
     name: 'Feedback'
-  }, {
+  },
+  {
     path: '/feedbackAP',
     component: () => import('@/views/FeedbackAPView.vue'),
     name: 'FeedbackAP'
