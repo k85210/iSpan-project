@@ -5,6 +5,12 @@ $gdg-gold-hover: #605a44;
 $gdg-bg-light: rgba(160, 150, 115, 0.05);
 
 // Custom Button Styles
+.btn {
+    background-color: $gdg-gold;
+    border: 1px solid $gdg-gold;
+
+}
+
 .btn-gdg {
     background-color: $gdg-gold;
     color: #fff;
@@ -29,6 +35,8 @@ $gdg-bg-light: rgba(160, 150, 115, 0.05);
         color: #fff;
     }
 }
+
+
 
 // Custom Card Styles
 .card-gdg {

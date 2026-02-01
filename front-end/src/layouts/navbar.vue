@@ -1,11 +1,15 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import { useCartStore } from '@/stores/cart';
 
 const router = useRouter();
 
 const goTo = (path) => {
   router.push(path);
 };
+
+const cartStore = useCartStore()
+
 </script>
 
 <template>
@@ -77,14 +81,20 @@ const goTo = (path) => {
           <li class="nav-item">
             <a class="nav-link" href="#">地圖</a>
           </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="#" @click.prevent="goTo('/shopStore')">質感選物</a>
+          </li>
+
         </ul>
+        
 
         <!-- Right Side: Icons & Account -->
-        <div class="nav-icons d-flex align-items-center">
-          <a class="nav-link position-relative px-3" href="#" title="購物車">
+        <div class="nav-icons d-flex align-items-center" >
+          <a class="nav-link position-relative px-3"  title="購物車" @click="router.push('/cart')">
             <i class="bi bi-cart3"></i>
             <span class="position-absolute top-25 start-75 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
-              0
+              {{ cartStore.totalQuantity }}
             </span>
           </a>
           
