@@ -1,4 +1,8 @@
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import BaseCard from '@/components/common/BaseCard.vue';
+import BaseButton from '@/components/common/BaseButton.vue';
 
 
 const router = useRouter();
@@ -57,5 +61,13 @@ const handleLogin = () => {
 </template>
 
 <style scoped>
+/* Specific input refinement for GDG style */
+.form-control:focus {
+  border-color: #9f9572;
+  box-shadow: 0 0 0 0.25rem rgba(160, 150, 115, 0.25);
+}
 
+.border-gdg-light {
+  border-color: #e2dfd5;
+}
 </style>
