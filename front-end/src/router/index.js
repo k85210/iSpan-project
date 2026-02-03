@@ -85,6 +85,16 @@ const routes = [
     component: () => import('@/views/RegisterView.vue'),
     name: 'Register',
     meta: { layout: 'blank' }
+  },
+  {
+    path: '/productsDetail/:id',
+    component: () => import('@/views/productsDetail.vue'),
+    name: 'productsDetail',
+  },
+  {
+    path: '/checkOut',
+    component: () => import('@/views/checkOut.vue'),
+    name: 'checkOut',
   }
 
 ];

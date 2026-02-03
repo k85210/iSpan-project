@@ -21,6 +21,14 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  width: {
+    type: String,
+    default: '' // e.g., '150px', '100%', 'auto'
+  },
+  fullWidth: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -47,14 +55,27 @@ const buttonClasses = computed(() => {
   
   return classes.join(' ');
 });
+
+const buttonStyles = computed(() => {
+  const styles = {};
+  
+  if (props.fullWidth) {
+    styles.width = '100%';
+  } else if (props.width) {
+    styles.width = props.width;
+  }
+  
+  return styles;
+});
 </script>
 
 <template>
   <button 
     :type="type" 
     :class="buttonClasses" 
+    :style="buttonStyles"
     :disabled="disabled"
-    @click="$emit('click')"
+    @click="$emit('click', $event)"
   >
     <slot>{{ label }}</slot>
   </button>
@@ -65,5 +86,6 @@ const buttonClasses = computed(() => {
 .btn {
   font-weight: 500;
   letter-spacing: 1px;
+  height: auto; /* 確保高度不會因寬度調整而改變 */
 }
 </style>
