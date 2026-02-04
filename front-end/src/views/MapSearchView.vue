@@ -5,7 +5,7 @@ import SearchBar from '@/components/SearchBar.vue';
 </script>
 
 <template>
-    <h1>地圖搜尋頁面</h1>
+    
 
     <div>
         <SearchBar></SearchBar>
