@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import BaseButton from '@/components/common/BaseButton.vue';
 import EditBookingData from '@/components/EditBookingData.vue';
 import Swal from 'sweetalert2';
 
@@ -69,6 +68,12 @@ const handleDelete = async (booking) => {
     Swal.fire('已取消訂位', '我們已更新您的訂位紀錄。', 'success');
   }
 };
+
+// 額外邏輯：當人數或日期改變時，重置已選時段
+const resetTime = () => {
+  bookingForm.value.time = '';
+};
+
 </script>
 
 <template>
@@ -87,3 +92,6 @@ const handleDelete = async (booking) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+</style>
