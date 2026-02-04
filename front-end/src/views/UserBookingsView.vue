@@ -1,80 +1,89 @@
 <script setup>
-import BaseButton from '@/components/common/BaseButton.vue';
-import Swal from 'sweetalert2';
 import { ref } from 'vue';
+import BaseButton from '@/components/common/BaseButton.vue';
+import EditBookingData from '@/components/EditBookingData.vue';
+import Swal from 'sweetalert2';
 
-const fakeBookingData = ref([{
-  id: "1",
-  resterount:"唐門食堂",
-  customerName: "趙活",
-  phone: "0912-345-678",
-  date: "2026-02-14",
-  time: "18:30",
-  guests: 1,
-  tableType: "2人桌",
-},
-{
-  id: "2",
-  resterount:"Tahiti大溪地餐廳",
-  customerName: "Arthur Morgan",
-  phone: "0922-888-777",
-  date: "2026-02-15",
-  time: "12:00",
-  guests: 8,
-  tableType: "8人桌",
-}
-])
+// 模擬資料庫資料
+const fakeBookingData = ref([
+  {
+    id: "1",
+    resterount: "唐門食堂",
+    name: "趙活",
+    phone: "0912-345-678",
+    date: "2026-02-14",
+    time: "18:30",
+    people: 1,
+    tableType: "2人桌",
+  },
+  {
+    id: "2",
+    resterount: "Tahiti大溪地餐廳",
+    name: "Arthur Morgan",
+    phone: "0922-888-777",
+    date: "2026-02-15",
+    time: "12:00",
+    people: 8,
+    tableType: "8人桌",
+  }
+]);
 
+// 處理子組件傳回來的更新資料 (與店家端相似)
+const handleUpdate = async (updatedItem) => {
+  const index = fakeBookingData.value.findIndex(item => item.id === updatedItem.id);
 
-const updateBooking = (booking) => {
-  Swal.fire({
-    icon: 'success',
-    title: '進入修改模式',
-    text: `正在修改 ${booking.customerName} 的訂位...`,
-    timer: 1500,
-    showConfirmButton: false
-  });
+  if (index !== -1) {
+    // 執行更新
+    fakeBookingData.value[index] = { ...updatedItem };
+
+    // 成功提示
+    await Swal.fire({
+      icon: 'success',
+      title: '資料已更新',
+      text: '您的個人聯絡資訊修改成功！',
+      timer: 1500,
+      showConfirmButton: false
+    });
+    
+    console.log('使用者更新成功:', updatedItem);
+  }
 };
 
-// 顯示明細的邏輯
-const showDetail = (booking) => {
-  Swal.fire({
-    title: '<strong>訂位明細</strong>',
-    html: `
-      <div style="text-align: left;">
-        <p><b>店家名稱：</b>${booking.resterount}</p>
-        <p><b>姓名：</b>${booking.customerName}</p>
-        <p><b>電話：</b>${booking.phone}</p>
-        <p><b>日期：</b>${booking.date} ${booking.time}</p>
-        <p><b>人數：</b>${booking.guests} 人 (${booking.tableType})</p>
-      </div>
-    `,
+// 刪除/取消邏輯 (統一命名為 handleDelete 以對應 component 的 emit)
+const handleDelete = async (booking) => {
+  const result = await Swal.fire({
+    title: '確定要取消訂位嗎？',
+    text: `取消 ${booking.resterount} 的訂位後可能無法保留原額度`,
+    icon: 'warning',
     showCancelButton: true,
-    confirmButtonText: '修改訂位',
-    cancelButtonText: '關閉',
-    confirmButtonColor: '#3085d6', // 根據你的 GDG 顏色調整
-  }).then((result) => {
-    // 如果使用者點擊了「修改訂位」按鈕
-    if (result.isConfirmed) {
-      updateBooking(booking);
-    }
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: '確定取消',
+    cancelButtonText: '再想想'
   });
+
+  if (result.isConfirmed) {
+    // 這裡通常是呼叫 API
+    fakeBookingData.value = fakeBookingData.value.filter(item => item.id !== booking.id);
+    
+    Swal.fire('已取消訂位', '我們已更新您的訂位紀錄。', 'success');
+  }
 };
-
-
 </script>
 
 <template>
   <div class="container py-4">
-    <h1 class="text-gdg mb-4">訂位查詢頁面(使用者)</h1>
-    <div class="mb-4">
-      <div v-for="booking in fakeBookingData" :key="booking.id" class="mb-3 p-3 border rounded">
-        <p>{{ booking.date }} - {{ booking.customerName }} - {{ booking.phone }}</p>
-        <BaseButton color="gdg" @click="showDetail(booking)" class="mx-1">查詢訂位明細</BaseButton>
-        <BaseButton color="gdg" @click="deleteBooking" class="mx-1">刪除訂位</BaseButton>
-      </div>
+    <h1 class="text-gdg mb-4">我的訂位管理</h1>
+
+    <EditBookingData 
+      :bookings="fakeBookingData" 
+      role="user" 
+      @update="handleUpdate" 
+      @delete="handleDelete"
+    />
+    
+    <div class="mt-4 text-muted small">
+      <p>* 提醒：使用者模式僅開放修改「姓名」與「電話」，如需更改時間請致電店家。</p>
     </div>
   </div>
 </template>
-
-<style scoped></style>

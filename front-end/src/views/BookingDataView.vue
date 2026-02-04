@@ -58,7 +58,7 @@ const handleUpdate = (updatedItem) => {
 <template>
   <div class="container py-4">
     <h1 class="text-gdg mb-4">訂位管理系統</h1>
-    <EditBookingData :bookings="bookingList" @delete="handleDelete" @update="handleUpdate" />
+    <EditBookingData :bookings="bookingList" role="shop" @delete="handleDelete" @update="handleUpdate" />
     <!-- 傳給子層時變成bookings與delete -->
   </div>
 </template>
