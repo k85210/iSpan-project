@@ -64,7 +64,7 @@ const handleSave = () => {
     <div class="mt-4">
       <h2 class="text-gdg h4 mb-3">訂位編輯系統</h2>
       <RouterLink :to="{ name: 'Seats' }" v-slot="{ navigate }">
-        <BaseButton color="outline-gdg" @click="navigate">點擊進入系統</BaseButton>
+        <BaseButton color="gdg" @click="navigate">點擊進入系統</BaseButton>
       </RouterLink>
     </div>
   </div>

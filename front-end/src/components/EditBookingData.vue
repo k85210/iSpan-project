@@ -62,8 +62,8 @@ const cancelEdit = () => {
                         <td>{{ item.people }}</td>
                         <td>
                             <div class="d-flex gap-2">
-                                <BaseButton color="gdg" size="sm" @click="saveEdit">儲存</BaseButton>
-                                <BaseButton color="outline-gdg" size="sm" @click="cancelEdit">取消</BaseButton>
+                                <BaseButton color="outline-gdg" size="sm" @click="saveEdit">儲存</BaseButton>
+                                <BaseButton color="outline-danger" size="sm" @click="cancelEdit">取消</BaseButton>
                             </div>
                         </td>
                     </template>
@@ -77,8 +77,8 @@ const cancelEdit = () => {
                         <td>{{ item.people }}</td>
                         <td>
                             <div class="d-flex gap-2">
-                                <BaseButton color="outline-gdg" size="sm" @click="startEdit(item)">修改</BaseButton>
-                                <BaseButton color="danger" size="sm" @click="$emit('delete', item.id)">刪除</BaseButton>
+                                <BaseButton color="gdg" size="sm" @click="startEdit(item)">修改</BaseButton>
+                                <BaseButton color="danger" size="sm" @click="$emit('delete', item)">刪除</BaseButton>
                             </div>
                         </td>
                     </template>
