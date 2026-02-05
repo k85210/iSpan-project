@@ -172,6 +172,11 @@ const routes = [
         path: 'sales/reports',
         name: 'AdminSalesReports',
         component: () => import('@/views/AdminDashboard.vue') // placeholder
+      },
+      {
+        path: 'users/list',
+        name: 'AdminUsersList',
+        component: () => import('@/views/UserListView.vue')
       }
     ]
   }
