@@ -10,8 +10,13 @@ import SearchBar from '@/components/SearchBar.vue';
     <div>
         <SearchBar></SearchBar>
         <br>
-        <MapContainer></MapContainer>
-        <MapStoreCard></MapStoreCard>
+
+        <div style="display: flex;">
+            <div style="flex: 1; background-color: lightblue;"><MapContainer></MapContainer></div>
+            <div style="flex: 1; background-color: lightgreen;"><MapStoreCard></MapStoreCard></div>
+        </div>
+       
+       
         
     </div>
 
