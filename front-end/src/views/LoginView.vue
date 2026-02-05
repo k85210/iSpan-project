@@ -3,18 +3,39 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseCard from '@/components/common/BaseCard.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
+import { authAPI } from '@/api/auth';
 
 
 const router = useRouter();
 const email = ref('');
 const password = ref('');
+const isSubmitting = ref(false);
 
 const goToRegister = () => {
   router.push('/register');
 };
 
-const handleLogin = () => {
-  console.log('Login attempt with:', email.value, password.value);
+const handleLogin = async () => {
+  if (isSubmitting.value) return;
+  
+  isSubmitting.value = true;
+  const loginData = {
+    identifier: email.value,
+    password: password.value
+  };
+
+  try {
+    console.log('Login attempt with:', loginData);
+    const response = await authAPI.login(loginData);
+    console.log('Login success:', response);
+    // Handle successful login (e.g., store token, redirect)
+  } catch (error) {
+    console.error('Login failed:', error);
+    // As per user request, alert the JSON data for verification
+    alert(`登入請求失敗 (預計傳送到後端的 JSON):\n${JSON.stringify(loginData, null, 2)}`);
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 </script>
 
@@ -44,8 +65,8 @@ const handleLogin = () => {
         </div>
 
         <div class="d-grid gap-3 pt-2">
-          <BaseButton color="gdg" size="md" @click="handleLogin" class="fw-bold py-2">
-            <span style="font-size: 12px;">登入</span>
+          <BaseButton color="gdg" size="md" @click="handleLogin" :disabled="isSubmitting" class="fw-bold py-2">
+            <span style="font-size: 12px;">{{ isSubmitting ? '登入中...' : '登入' }}</span>
           </BaseButton>
 
           <div class="divider-container my-2">

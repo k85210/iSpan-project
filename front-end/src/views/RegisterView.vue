@@ -3,16 +3,36 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseCard from '@/components/common/BaseCard.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
+import { authAPI } from '@/api/auth';
 
 const router = useRouter();
 
 const email = ref('');
 const password = ref('');
+const isSubmitting = ref(false);
 
-const handleRegister = () => {
-  // 基本驗證可以在此加入，但使用者要求直接 alert 並跳轉
-  alert("註冊成功");
-  router.push('/login');
+const handleRegister = async () => {
+  if (isSubmitting.value) return;
+
+  isSubmitting.value = true;
+  const registerData = {
+    email: email.value,
+    password: password.value
+    // Add other fields as needed for real registration
+  };
+
+  try {
+    console.log('Register attempt with:', registerData);
+    const response = await authAPI.register(registerData);
+    console.log('Register success:', response);
+    alert("註冊成功");
+    router.push('/login');
+  } catch (error) {
+    console.error('Register failed:', error);
+    alert(`註冊請求失敗 (預計傳送到後端的 JSON):\n${JSON.stringify(registerData, null, 2)}`);
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 
 const goToLogin = () => {
@@ -70,9 +90,10 @@ const goToLogin = () => {
             color="gdg" 
             size="md" 
             @click="handleRegister"
+            :disabled="isSubmitting"
             class="fw-bold py-2"
           >
-            <span style="font-size: 12px;">註冊</span>
+            <span style="font-size: 12px;">{{ isSubmitting ? '註冊中...' : '註冊' }}</span>
           </BaseButton>
           
           <div class="text-center mt-3">

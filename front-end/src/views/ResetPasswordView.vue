@@ -3,26 +3,37 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseCard from '@/components/common/BaseCard.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
+import { authAPI } from '@/api/auth';
 
 const router = useRouter();
 const newPassword = ref('');
 const confirmPassword = ref('');
 const isSubmitting = ref(false);
 
-const handleResetPassword = () => {
+const handleResetPassword = async () => {
     if (newPassword.value !== confirmPassword.value) {
         alert("兩次輸入的密碼不一致");
         return;
     }
 
     isSubmitting.value = true;
-    
-    // Simulate API call
-    setTimeout(() => {
-        isSubmitting.value = false;
+    const data = { 
+        password: newPassword.value 
+        // token would usually be from query params
+    };
+
+    try {
+        console.log('Reset password request with:', data);
+        const response = await authAPI.resetPassword(data);
+        console.log('Reset password success:', response);
         alert("密碼重設成功！請使用新密碼登入。");
         router.push('/login');
-    }, 1500);
+    } catch (error) {
+        console.error('Reset password failed:', error);
+        alert(`重設請求失敗 (預計傳送到後端的 JSON):\n${JSON.stringify(data, null, 2)}`);
+    } finally {
+        isSubmitting.value = false;
+    }
 };
 </script>
 
@@ -64,7 +75,7 @@ const handleResetPassword = () => {
                     <BaseButton 
                         color="gdg" 
                         class="py-2 fw-bold" 
-                        label="重設密碼" 
+                        :label="isSubmitting ? '重設中...' : '重設密碼'" 
                         :disabled="isSubmitting"
                         @click="handleResetPassword"
                     />

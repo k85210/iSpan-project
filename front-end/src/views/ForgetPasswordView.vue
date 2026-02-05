@@ -3,28 +3,29 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseCard from '@/components/common/BaseCard.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
+import { authAPI } from '@/api/auth';
 
 const router = useRouter();
 const email = ref('');
 const isSubmitting = ref(false);
 
-const handleSendResetLink = () => {
+const handleSendResetLink = async () => {
+    if (isSubmitting.value) return;
+
     isSubmitting.value = true;
-    
-    // Simulate API call
-    setTimeout(() => {
-        isSubmitting.value = false;
+    const data = { email: email.value };
+
+    try {
+        console.log('Forgot password request with:', data);
+        const response = await authAPI.forgotPassword(data);
+        console.log('Forgot password success:', response);
         alert(`重設密碼信件已發送至 ${email.value}`);
-        // In a real app, you might stay here or redirect to a "check email" page.
-        // For this demo flow, we'll go straight to the reset page as requested/implied for testing, 
-        // or actually, usually the user clicks a link in email. 
-        // The user said: "用戶收到信後會跳轉到ResetPassWordView.vue"
-        // So here we might just show success message. But for testing convenience, let's just log it.
-        // Or maybe for the flow demo we can just redirect to reset password to show the view?
-        // Let's stick to "Send email" logic. The user will manually nav to reset or we assume they clicked the link.
-        // Wait, user said "用戶收到信後會跳轉到ResetPassWordView.vue", asking to MAKE that page.
-        // I will just alert success here.
-    }, 1500);
+    } catch (error) {
+        console.error('Forgot password failed:', error);
+        alert(`發送請求失敗 (預計傳送到後端的 JSON):\n${JSON.stringify(data, null, 2)}`);
+    } finally {
+        isSubmitting.value = false;
+    }
 };
 
 // Temporary helper for testing flow without email link
@@ -86,7 +87,7 @@ const debugGoToReset = () => {
                     <BaseButton 
                         color="gdg" 
                         class="text-white py-2 fw-bold" 
-                        label="發送密碼重設信件" 
+                        :label="isSubmitting ? '發送中...' : '發送密碼重設信件'" 
                         :disabled="isSubmitting"
                         @click="handleSendResetLink"
                     />
