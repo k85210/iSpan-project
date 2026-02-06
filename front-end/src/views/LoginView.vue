@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import BaseCard from '@/components/common/BaseCard.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
 import { authAPI } from '@/api/auth';
+import { decodeJwtPayload, getRoleFromToken, getSubFromToken, isTokenExpired } from '@/utils/jwt';
 
 
 const router = useRouter();
@@ -28,10 +29,37 @@ const handleLogin = async () => {
     console.log('Login attempt with:', loginData);
     const response = await authAPI.login(loginData);
     console.log('Login success:', response);
-    // Handle successful login (e.g., store token, redirect)
+    
+    // ========== 解析 JWT Token ==========
+    // 注意: axios interceptor 已經回傳 response.data，所以這裡的 response 就是 {success, message, data}
+    const accessToken = response.data.accessToken;
+    
+    // 方法 1: 取得完整 payload
+    const payload = decodeJwtPayload(accessToken);
+    console.log('========== JWT Payload ==========');
+    console.log('Full Payload:', payload);
+    
+    // 方法 2: 使用便捷函數取得特定欄位
+    const role = getRoleFromToken(accessToken);
+    const sub = getSubFromToken(accessToken);
+    const expired = isTokenExpired(accessToken);
+    
+    console.log('Role:', role);
+    console.log('Sub (Email):', sub);
+    console.log('Is Expired:', expired);
+    console.log('=================================');
+    
+    // 可選：儲存 token 到 localStorage
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', response.data.refreshToken);
+    
+    alert(`登入成功！\n角色: ${role}\n帳號: ${sub}`);
+    
+    // 導向首頁或 dashboard
+    // router.push('/');
+    
   } catch (error) {
     console.error('Login failed:', error);
-    // As per user request, alert the JSON data for verification
     alert(`登入請求失敗 (預計傳送到後端的 JSON):\n${JSON.stringify(loginData, null, 2)}`);
   } finally {
     isSubmitting.value = false;
