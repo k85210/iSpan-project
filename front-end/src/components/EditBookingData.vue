@@ -31,6 +31,18 @@ const saveEdit = () => {
 const cancelEdit = () => {
     editingId.value = null;
 };
+
+
+// 日期選擇限制
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate());
+// 使用在地時間格式化 (YYYY-MM-DD)
+const year = tomorrow.getFullYear();
+const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+const day = String(tomorrow.getDate()).padStart(2, '0');
+
+const minDate = `${year}-${month}-${day}`;
+
 </script>
 
 <template>
@@ -72,7 +84,8 @@ const cancelEdit = () => {
 
                         <td>
                             <input v-if="role === 'shop'" type="date" v-model="tempEditItem.date"
-                                class="form-control form-control-sm table-input" />
+                                class="form-control form-control-sm table-input" :min="minDate"
+                                @change="resetTime" />
                             <span v-else>{{ item.date }}</span>
                         </td>
                         <td>

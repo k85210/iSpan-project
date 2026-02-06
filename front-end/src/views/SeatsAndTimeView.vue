@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import SeatManager from '@/components/EditSeat.vue';
 import TimeSlotManager from '@/components/EditTime.vue';
 import BaseButton from '@/components/common/BaseButton.vue';
+import Swal from 'sweetalert2';
 
 // 假資料初始狀態
 const seatData = ref([
@@ -17,12 +18,19 @@ const bookingConfig = ref({
   duration: 90
 });
 
-const saveSettings = () => {
+const saveSettings = async () => {
   console.log('儲存設定至資料庫:', {
     seats: seatData.value,
     config: bookingConfig.value
   });
-  alert('設定已暫存，請查看 Console！');
+  // 成功提示
+  await Swal.fire({
+    icon: 'success',
+    title: '資料已更新',
+    text: '成功修改座位與時段設定',
+    timer: 1500,
+    showConfirmButton: false
+  });
 };
 </script>
 
