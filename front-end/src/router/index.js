@@ -192,6 +192,17 @@ const routes = [
         name: 'StoreRegistrationCheck',
         component: () => import('@/views/StoreRegistrationCheckView.vue')
       }
+      ,
+      {
+        path: 'backEnd/productsList',
+        name: 'BackEndProductsList',
+        component: () => import('@/views/BackEndProductsList.vue') // placeholder
+      },
+      {
+        path: 'backEnd/productsStock',
+        name: 'BackEndProductsStock',
+        component: () => import('@/views/BackEndproductsStock.vue') // placeholder
+      },
     ]
   }
 
