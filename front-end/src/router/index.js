@@ -161,6 +161,17 @@ const routes = [
         name: 'AdminSalesReports',
         component: () => import('@/views/AdminDashboard.vue') // placeholder
       }
+      ,
+      {
+        path: 'backEnd/productsList',
+        name: 'BackEndProductsList',
+        component: () => import('@/views/BackEndProductsList.vue') // placeholder
+      },
+      {
+        path: 'backEnd/productsStock',
+        name: 'BackEndProductsStock',
+        component: () => import('@/views/BackEndproductsStock.vue') // placeholder
+      },
     ]
   }
 
