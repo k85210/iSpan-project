@@ -6,13 +6,13 @@ import com.example.demo.dto.UserResponse;
 import com.example.demo.dto.ChangePasswordRequest;
 import com.example.demo.dto.Enable2FAResponse;
 import com.example.demo.dto.Verify2FARequest;
-import com.example.demo.entity.Role;
+
 import com.example.demo.service.UserService;
 import com.example.demo.service.TwoFactorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,23 +38,23 @@ public class UserController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers() {
         List<UserResponse> users = userService.getAllUsers();
         return ResponseEntity.ok(ApiResponse.success(users));
     }
 
-    @PutMapping("/{id}/role")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<UserResponse>> updateUserRole(
+    @PutMapping("/{id}/store-status")
+    // @PreAuthorize("hasRole('ADMIN')") // TODO: Define new permission model
+    public ResponseEntity<ApiResponse<UserResponse>> updateStoreStatus(
             @PathVariable Long id,
-            @RequestParam Role role) {
-        UserResponse response = userService.updateUserRole(id, role);
-        return ResponseEntity.ok(ApiResponse.success("User role updated successfully", response));
+            @RequestParam Boolean isStore) {
+        UserResponse response = userService.updateStoreStatus(id, isStore);
+        return ResponseEntity.ok(ApiResponse.success("User store status updated successfully", response));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok(ApiResponse.success("User deleted successfully", null));

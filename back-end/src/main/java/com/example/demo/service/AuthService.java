@@ -4,7 +4,7 @@ import com.example.demo.dto.AuthResponse;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.dto.UserResponse;
-import com.example.demo.entity.Role;
+
 import com.example.demo.entity.User;
 import com.example.demo.exception.UserAlreadyExistsException;
 import com.example.demo.repository.UserRepository;
@@ -46,13 +46,14 @@ public class AuthService {
                                 .email(request.getEmail())
                                 .password(passwordEncoder.encode(request.getPassword()))
                                 .name(displayName)
-                                .role(Role.USER)
+                                .isStore(false)
                                 .enabled(true)
                                 .build();
 
                 user = userRepository.save(user);
 
-                String accessToken = tokenProvider.generateAccessToken(user.getEmail(), user.getRole().name());
+                String accessToken = tokenProvider.generateAccessToken(user.getEmail(),
+                                Boolean.TRUE.equals(user.getIsStore()) ? "STORE" : "USER");
                 String refreshToken = tokenProvider.generateRefreshToken(user.getEmail());
 
                 return AuthResponse.builder()
@@ -133,7 +134,8 @@ public class AuthService {
                 User user = userRepository.findByEmail(email)
                                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-                String newAccessToken = tokenProvider.generateAccessToken(email, user.getRole().name());
+                String newAccessToken = tokenProvider.generateAccessToken(email,
+                                Boolean.TRUE.equals(user.getIsStore()) ? "STORE" : "USER");
                 String newRefreshToken = tokenProvider.generateRefreshToken(email);
 
                 return AuthResponse.builder()
@@ -150,7 +152,7 @@ public class AuthService {
                                 .id(user.getId())
                                 .email(user.getEmail())
                                 .name(user.getName())
-                                .role(user.getRole())
+                                .isStore(user.getIsStore())
                                 .createdAt(user.getCreatedAt())
                                 .build();
         }

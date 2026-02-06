@@ -4,7 +4,7 @@ import com.example.demo.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -66,9 +66,10 @@ public class SecurityConfig {
                         // OAuth2 登入端點
                         .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
                         // 管理員權限端點
-                        .requestMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/users/*/role").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/users/*").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.PUT,
+                        // "/api/users/*/store-status").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.DELETE, "/api/users/*").hasRole("ADMIN")
                         // 其他請求需要認證
                         .anyRequest().authenticated())
                 // OAuth2 登入配置

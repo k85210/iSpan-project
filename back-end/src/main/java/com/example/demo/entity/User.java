@@ -33,10 +33,9 @@ public class User {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     @Builder.Default
-    private Role role = Role.USER;
+    private Boolean isStore = false; // 區分使用者是否為商店
 
     @Column(nullable = false)
     @Builder.Default

@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.UpdateProfileRequest;
 import com.example.demo.dto.UserResponse;
-import com.example.demo.entity.Role;
+
 import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
@@ -52,11 +52,11 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponse updateUserRole(Long userId, Role role) {
+    public UserResponse updateStoreStatus(Long userId, Boolean isStore) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
-        user.setRole(role);
+        user.setIsStore(isStore);
         user = userRepository.save(user);
         return mapToUserResponse(user);
     }
@@ -107,7 +107,7 @@ public class UserService {
                 .id(user.getId())
                 .email(user.getEmail())
                 .name(user.getName())
-                .role(user.getRole())
+                .isStore(user.getIsStore())
                 .createdAt(user.getCreatedAt())
                 .build();
     }

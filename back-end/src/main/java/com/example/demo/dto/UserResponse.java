@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +16,6 @@ public class UserResponse {
     private Long id;
     private String email;
     private String name;
-    private Role role;
+    private Boolean isStore;
     private LocalDateTime createdAt;
 }

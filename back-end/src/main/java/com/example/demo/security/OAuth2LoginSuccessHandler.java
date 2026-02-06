@@ -42,7 +42,8 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         User user = oauth2User.getUser();
 
         // 生成 JWT tokens
-        String accessToken = tokenProvider.generateAccessToken(user.getEmail(), user.getRole().name());
+        String accessToken = tokenProvider.generateAccessToken(user.getEmail(),
+                Boolean.TRUE.equals(user.getIsStore()) ? "STORE" : "USER");
         String refreshToken = tokenProvider.generateRefreshToken(user.getEmail());
 
         // 重定向到前端，將 tokens 作為 URL 參數傳遞

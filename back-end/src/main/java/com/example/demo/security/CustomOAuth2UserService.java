@@ -1,7 +1,7 @@
 package com.example.demo.security;
 
 import com.example.demo.entity.AuthProvider;
-import com.example.demo.entity.Role;
+
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -77,7 +77,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .email(email)
                 .name(name != null ? name : email.split("@")[0])
                 .password("") // OAuth 用戶不需要密碼
-                .role(Role.USER)
+                .isStore(false)
                 .enabled(true)
                 .authProvider(authProvider)
                 .providerId(providerId)
