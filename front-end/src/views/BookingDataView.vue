@@ -5,8 +5,9 @@ import Swal from 'sweetalert2';
 
 // 模擬假資料：訂位編號、姓名、電話、日期、時間、人數
 const bookingList = ref([
-  { id: '1', name: '趙活', phone: '0912-345-678', date: '2024-06-01', time: '18:00', people: 2 },
-  { id: '2', name: 'Arthur Morgan', phone: '0988-888-888', date: '2024-06-02', time: '12:30', people: 4 }
+  { id: '1', name: '趙活', phone: '0912-345-678', date: '2026-04-01', time: '18:00', people: 2 },
+  { id: '2', name: 'Arthur Morgan', phone: '0988-888-888', date: '2026-04-02', time: '12:30', people: 4 },
+  { id: '3', name: 'Geralt', phone: '0977-777-777', date: '2024-06-03', time: '12:00', people: 2 },
 ]);
 
 // 處理刪除的函式 (改為 async/await 寫法)
@@ -27,7 +28,7 @@ const handleDelete = async (bookings) => {
   if (result.isConfirmed) {
     // 執行過濾邏輯（刪除資料）
     bookingList.value = bookingList.value.filter(item => item.id !== bookings.id);
-    
+
     // 3. 顯示成功提示
     Swal.fire({
       title: '已刪除！',
@@ -36,17 +37,26 @@ const handleDelete = async (bookings) => {
       timer: 1500,
       showConfirmButton: false
     });
-    
+
     console.log('已刪除 ID:', bookings.id);
   }
 };
 
 // 處理更新
-const handleUpdate = (updatedItem) => {
+const handleUpdate = async (updatedItem) => {
   const index = bookingList.value.findIndex(item => item.id === updatedItem.id);
   if (index !== -1) {
     // 使用展開運算子，確保 Vue 絕對能偵測到物件內容的變動
     bookingList.value[index] = { ...updatedItem };
+    // 成功提示
+    await Swal.fire({
+      icon: 'success',
+      title: '資料已更新',
+      text: '成功修改訂位日期與時段',
+      timer: 1500,
+      showConfirmButton: false
+    });
+
     console.log('資料更新成功:', updatedItem);
   }
 };
@@ -63,5 +73,4 @@ const handleUpdate = (updatedItem) => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

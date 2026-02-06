@@ -71,11 +71,22 @@ const isSlotAvailable = (targetTime) => {
 };
 
 // --- 5. 其他輔助邏輯 ---
-const minDate = new Date().toISOString().split('T')[0];
+// 1. 取得明天 (minDate)
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+const minDate = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+
+// 2. 取得一個月後 (maxDate)
 const maxDate = computed(() => {
-  const date = new Date();
-  date.setMonth(date.getMonth() + 1);
-  return date.toISOString().split('T')[0];
+  const targetDate = new Date();
+  targetDate.setMonth(targetDate.getMonth() + 1); // 自動處理跨年邏輯
+  
+  const y = targetDate.getFullYear();
+  const m = String(targetDate.getMonth() + 1).padStart(2, '0');
+  const d = String(targetDate.getDate()).padStart(2, '0');
+  
+  return `${y}-${m}-${d}`;
 });
 
 const resetTime = () => { bookingForm.value.time = ''; };
