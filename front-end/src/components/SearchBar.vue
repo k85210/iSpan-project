@@ -115,7 +115,7 @@ $gdg-gold-dark: #776f54;
   border-radius: 4px;
   height: 48px;
   max-width: 650px;
-  margin: 50px auto;
+  margin: 20px auto;
   padding: 0 10px;
   background: #fff;
   position: relative;

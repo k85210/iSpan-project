@@ -18,9 +18,9 @@ const stores = ref(storeData);
 
 <style scoped>
 .map-card-container {
-    height: calc(100vh - 120px); /* Adjust based on header/search bar height */
+    height: 100%; /* Fill parent flex container */
     overflow-y: auto;
-    background-color: #f8f9fa; /* Light gray background */
+    /* background-color: #f8f9fa; Light gray background */
 }
 
 /* Custom scrollbar for Webkit (Chrome, Safari, Edge) */

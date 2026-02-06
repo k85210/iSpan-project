@@ -6,22 +6,22 @@ import SearchBar from '@/components/SearchBar.vue';
 
 <template>
     
-
-    <div>
-        <SearchBar></SearchBar>
-        <br>
-
-        <div style="display: flex; gap: 5px;">
-            <div style="flex: 4; border-radius: 2px; overflow: hidden;"><MapContainer></MapContainer></div>
-            <div style="flex: 3; "><MapCardContainer></MapCardContainer></div>
-        </div>
-       
-       
+<div class="page-container-gdg">
+        <div class="page-title-gdg">美味座標</div>
+        <div class="page-description-gdg">在城市的經緯間，標記你的美味時刻。</div>
+        <div><SearchBar></SearchBar></div>
         
-    </div>
-
-
-
+        <div class="map-layout-gdg">
+            <div class="map-main-wrapper">
+                <MapContainer></MapContainer>
+            </div>
+            
+            <div class="map-sidebar-wrapper">
+                <MapCardContainer></MapCardContainer>
+            </div>
+        </div>
+    </div> 
+        
 
 </template>
 
